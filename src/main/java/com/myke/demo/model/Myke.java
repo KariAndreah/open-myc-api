@@ -16,6 +16,7 @@ public class Myke {
     private long id;
     private String name;
     // private int address_id;
+    private String borough; 
     private Time start_time; 
     private String day;
     // private int host;
@@ -35,6 +36,7 @@ public class Myke {
     int address_id, 
     Time start_time, 
     String day,
+    String borough,
     // int host,
     // int cost,
     // int signup,
@@ -42,6 +44,7 @@ public class Myke {
         this.id=id;
         this.name=name;
         // this.address_id=address_id;
+        this.borough=borough; 
         this.start_time=start_time;
         // this.host=host;
         // this.cost=cost;
@@ -89,6 +92,13 @@ public class Myke {
     }
     public void setDay(String day) {
         this.day = day;
+    }
+    @Column(name = "borough", nullable = false)
+    public String getBorough() {
+        return borough;
+    }
+    public void setBorough(String borough) {
+        this.borough = borough;
     }
     // @Column(name = "host", nullable = false)
     // public int getHostId() {
