@@ -1,16 +1,17 @@
 package com.myke.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.data.domain.Page;
-// import org.springframework.data.domain.PageRequest;
-// import org.springframework.data.domain.Pageable;
-// import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 import com.myke.demo.repository.MykeRepository;
 
+import java.util.ArrayList;
 // import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -46,22 +47,35 @@ public class MykeService {
     // }
 
      //Get All Mics by Day and Cost
-     public List<Myke> findByDayAndCostOptional(String day, Cost cost ) {
-        return mykeRepository.findByDayAndCostOptional(day, cost);
+    //  public List<Myke> findByDayAndCostOptional(String day, Cost cost ) {
+    //     return mykeRepository.findByDayAndCostOptional(day, cost);
+    // }
+
+    // Get all Mics with Day and Cost Pageable
+     public List<Myke> findByDayAndCostOptional(String day, Cost cost, Integer pageNo, Integer pageSize, String sortBy ) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy)); 
+
+          Page<Myke> pagedResult = mykeRepository.findByDayAndCostOptional(day, cost, paging);
+
+        if(pagedResult.hasContent()){
+            return pagedResult.getContent();
+        } else {
+            return new ArrayList<Myke>(); 
+        }
     }
 
     // Get all mics 
-    // public List<Myke> getAllMics(Integer pageNo, Integer pageSize, String sortBy) {
+    public List<Myke> getAllMics(Integer pageNo, Integer pageSize, String sortBy) {
        
-    //     Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy)); 
-    //     Page<Myke> pagedResult = mykeRepository.findAll(paging);
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy)); 
+        Page<Myke> pagedResult = mykeRepository.findAll(paging);
 
-    //     if(pagedResult.hasContent()){
-    //         return pagedResult.getContent();
-    //     } else {
-    //         return new ArrayList<Myke>(); 
-    //     }
-    // }
+        if(pagedResult.hasContent()){
+            return pagedResult.getContent();
+        } else {
+            return new ArrayList<Myke>(); 
+        }
+    }
 
     // Get mic by ID
     // public Optional<Myke> getMykeById(Long id) {

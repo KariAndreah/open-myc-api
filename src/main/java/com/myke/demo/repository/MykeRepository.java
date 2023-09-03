@@ -8,6 +8,8 @@ import com.myke.demo.model.Myke;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 // import org.springframework.data.domain.Page;
 // import org.springframework.data.domain.Pageable;
 // import org.springframework.data.domain.Sort;
@@ -42,7 +44,7 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
     // List<Myke> findByDayAndCost(@Param("day") String day, @Param("cost") Cost id );
 
     @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.cost is NULL OR m.cost = :cost)")
-    List<Myke> findByDayAndCostOptional(@Param("day") String day, @Param("cost") Cost id );
+    Page<Myke> findByDayAndCostOptional(@Param("day") String day, @Param("cost") Cost id, Pageable pageable );
 
 
     // @Query("SELECT m FROM Myke m WHERE m.cost LIKE %?1%")
@@ -54,7 +56,7 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
   
   
     // Pagination and Sorting with Pageable
-    // @Query("SELECT m FROM Myke m")
-    // Page<Myke> findAllWithPagination(Pageable pageable);
+    @Query("SELECT m FROM Myke m")
+    Page<Myke> getAllMics(Pageable pageable);
 
 }
