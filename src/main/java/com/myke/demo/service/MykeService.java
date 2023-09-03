@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-
+import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 import com.myke.demo.repository.MykeRepository;
 
@@ -38,6 +38,16 @@ public class MykeService {
     //Get All Mics by Day and ID
      public List<Myke> findByDayAndId(String day, Long id) {
         return mykeRepository.findByDayAndId(day, id);
+    }
+
+     //Get All Mics by Day and Cost
+    //  public List<Myke> findByDayAndCost(String day, Cost cost ) {
+    //     return mykeRepository.findByDayAndCost(day, cost);
+    // }
+
+     //Get All Mics by Day and Cost
+     public List<Myke> findByDayAndCostOptional(String day, Cost cost ) {
+        return mykeRepository.findByDayAndCostOptional(day, cost);
     }
 
     // Get all mics 

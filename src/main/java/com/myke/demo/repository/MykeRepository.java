@@ -1,5 +1,6 @@
 package com.myke.demo.repository;
 
+import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 
 // import java.sql.Time;
@@ -34,8 +35,15 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
     @Query("SELECT m FROM Myke m WHERE m.day LIKE %:day%")
     List<Myke> findByDay(@Param("day") String day);
 
-    @Query(value = "SELECT m FROM Myke m WHERE LIKE %:day% AND m.id=:id", nativeQuery = true)
-    List<Myke> findByDayAndId(@Param("day") String day, @Param("id") Long id);
+    @Query(value = "SELECT m FROM Myke m WHERE m.day LIKE %:day% AND m.id=:id", nativeQuery = true)
+    List<Myke> findByDayAndId(@Param("day") String day, @Param("id") long id);
+
+    //  @Query(value = "SELECT m FROM Myke m WHERE m.day LIKE %:day% AND m.cost = :cost")
+    // List<Myke> findByDayAndCost(@Param("day") String day, @Param("cost") Cost id );
+
+    @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.cost is NULL OR m.cost = :cost)")
+    List<Myke> findByDayAndCostOptional(@Param("day") String day, @Param("cost") Cost id );
+
 
     // @Query("SELECT m FROM Myke m WHERE m.cost LIKE %?1%")
     // List<Myke> findByCost(String cost);

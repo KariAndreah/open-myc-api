@@ -1,8 +1,10 @@
 package com.myke.demo.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
+import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 import com.myke.demo.service.MykeService;
 
@@ -10,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -25,22 +29,46 @@ public class MykeController {
     }
 
     // Get mic by ID
-    @GetMapping("/id/{id}")
-    public Optional<Myke> findById(@PathVariable Long id) {
+    @GetMapping("/{id}")
+    public Optional<Myke> findById(@PathVariable (required = false) Long id) {
         return mykeService.findById(id);
     }
 
     //   Get mic by Day
-    @GetMapping(value ="/day/{day}")
+    @GetMapping("/day={day}")
     public List<Myke> findByDay(@PathVariable String day) {
         return mykeService.findByDay(day);
     }
 
     // Get mic by ID
-    // @GetMapping("/{id}/{day}")
-    // public List<Myke> findByDayAndId(@PathVariable String day, Long id) {
-    //     return mykeService.findByDayAndId(day, id);
+    @GetMapping("/id={id}&day={day}")
+    public List<Myke> findByDayAndId(@PathVariable String day, Long id) {
+        return mykeService.findByDayAndId(day, id);
+    }
+
+    // Get mic by day and cost 
+    // @GetMapping(value = "test")
+    // public List<Myke> findByDayAndCost( @RequestParam("day") String day,
+    //                                     @RequestParam("cost") Cost cost ) 
+    //                                  {
+    //     return mykeService.findByDayAndCost(day, cost );
     // }
+
+     // Get mic by day and cost 
+    @GetMapping(value = "test")
+    public List<Myke> findByDayAndCostOptional( @RequestParam(value = "day", required=false) String day,
+                                                @RequestParam(value = "cost",  required=false) Cost cost ) 
+                                     {
+        return mykeService.findByDayAndCostOptional(day, cost );
+    }
+
+    // Get all parameters
+    @GetMapping(value = "findBy")
+    @ResponseBody
+    public String updateFoos(@RequestParam Map<String,String> allParams) {
+        return "Parameters are " + allParams.entrySet();    
+    }
+
 
 	// Geta all mics
 	// @GetMapping
