@@ -3,6 +3,7 @@ package com.myke.demo.repository;
 import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 
+import java.time.LocalTime;
 // import java.sql.Time;
 // import java.util.Date;
 import java.util.List;
@@ -45,6 +46,9 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
 
     @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.cost is NULL OR m.cost = :cost)")
     Page<Myke> findByDayAndCostOptional(@Param("day") String day, @Param("cost") Cost id, Pageable pageable );
+
+    @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.start_time BETWEEN :timeA and :timeB)")
+    Page<Myke> findByDayAndTime(@Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, Pageable pageable );
 
 
     // @Query("SELECT m FROM Myke m WHERE m.cost LIKE %?1%")

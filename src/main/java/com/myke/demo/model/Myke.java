@@ -1,7 +1,8 @@
 package com.myke.demo.model;
 
-import java.sql.Date;
-import java.sql.Time;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -17,12 +18,12 @@ public class Myke {
     private String name;
     // private int address_id;
     private String borough; 
-    private Time start_time; 
+    private LocalTime start_time; 
     private String day;
     // private int host;
     // private int cost; 
     // private int signup; 
-    private Date confirmed; 
+    private LocalDate confirmed; 
 
    
 
@@ -34,13 +35,13 @@ public class Myke {
     long id, 
     String name, 
     int address_id, 
-    Time start_time, 
+    LocalTime start_time, 
     String day,
     String borough,
     // int host,
     // int cost,
-    // int signup,
-    Date confirmed ) {
+    int signup,
+    LocalDate date ) {
         this.id=id;
         this.name=name;
         // this.address_id=address_id;
@@ -49,7 +50,7 @@ public class Myke {
         // this.host=host;
         // this.cost=cost;
         // this.signup=signup;
-        this.confirmed=confirmed;  
+        this.confirmed=date;  
     }
 
   
@@ -80,10 +81,10 @@ public class Myke {
     // }
 
     @Column(name = "start_time", nullable = false)
-    public Time getTime() {
+    public LocalTime getTime() {
         return start_time;
     }
-    public void setTime(Time start_time) {
+    public void setTime(LocalTime start_time) {
         this.start_time = start_time;
     }
     @Column(name = "day", nullable = false)
@@ -114,7 +115,7 @@ public class Myke {
     // public void setCostId(int cost) {
     //     this.cost = cost;
     // }
-    // @Column(name = "signup", nullable = false)
+    // @Column(name = "signup_id", nullable = false)
     // public int getSignupId() {
     //     return signup;
     // }
@@ -122,10 +123,10 @@ public class Myke {
     //     this.signup = signup;
     // }
     @Column(name = "confirmed", nullable = false)
-    public Date getConfirmedDate() {
+    public LocalDate getConfirmedDate() {
         return confirmed;
     }
-    public void setConfirmedDate(Date confirmed) {
+    public void setConfirmedDate(LocalDate confirmed) {
         this.confirmed = confirmed;
     }
 
@@ -153,17 +154,8 @@ public class Myke {
         this.cost = cost; 
     }
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
-    @JsonManagedReference
-    private Host host; 
+  
 
-    public Host getHost(){
-        return host; 
-    }
-
-    public void setHost(Host host) {
-        this.host = host; 
-    }
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
     @JsonManagedReference
@@ -175,6 +167,18 @@ public class Myke {
 
     public void setSignup(Signup signup) {
         this.signup = signup; 
+    }
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
+    @JsonManagedReference
+    private Host host; 
+
+    public Host getHost(){
+        return host; 
+    }
+
+    public void setHost(Host host) {
+        this.host = host; 
     }
 
    

@@ -11,6 +11,7 @@ import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 import com.myke.demo.repository.MykeRepository;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 // import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +57,19 @@ public class MykeService {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy)); 
 
           Page<Myke> pagedResult = mykeRepository.findByDayAndCostOptional(day, cost, paging);
+
+        if(pagedResult.hasContent()){
+            return pagedResult.getContent();
+        } else {
+            return new ArrayList<Myke>(); 
+        }
+    }
+
+     // Get all Mics with Day and Time Pageable
+     public List<Myke> findByDayAndTime(String day, LocalTime start_timeA, LocalTime start_timeB, Integer pageNo, Integer pageSize, String sortBy ) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy)); 
+
+          Page<Myke> pagedResult = mykeRepository.findByDayAndTime(day, start_timeA, start_timeB, paging);
 
         if(pagedResult.hasContent()){
             return pagedResult.getContent();

@@ -1,5 +1,6 @@
 package com.myke.demo.controller;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -76,6 +77,21 @@ public class MykeController {
                         @RequestParam(defaultValue = "id") String sortBy)
     {
         List<Myke> list = mykeService.findByDayAndCostOptional(day, cost, pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+       // Get mic by day and cost and paging
+    @GetMapping(value ="findByTime")
+    public ResponseEntity<List<Myke>> findByDayAndTime(
+                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
+                        @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
+                        @RequestParam(value = "startTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.findByDayAndTime(day, start_timeA, start_timeB, pageNo, pageSize, sortBy);
 
         return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
