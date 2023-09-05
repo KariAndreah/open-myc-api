@@ -1,8 +1,6 @@
 package com.myke.demo.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -11,7 +9,7 @@ import jakarta.persistence.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long address_id;
     private int unit_number; 
     private String street_name;
     private String city; 
@@ -21,10 +19,6 @@ public class Address {
     private String longitude; 
     private String name; 
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    @JsonBackReference
-    private Myke myke;
 
 
     public Address() {
@@ -32,7 +26,7 @@ public class Address {
     }
 
     public Address(
-    long id,
+    long address_id,
     int unit_number, 
     String street_name,
     String city, 
@@ -42,7 +36,7 @@ public class Address {
     String longitude, 
     String name
      ) {
-        this.id=id;
+        this.address_id=address_id;
         this.unit_number=unit_number;
         this.street_name=street_name;
         this.city=city;
@@ -53,13 +47,21 @@ public class Address {
     }
 
    
-    @Column(name = "id", nullable = false)
+    @Column(name = "address_id", nullable = false)
     public long getId() {
-        return id;
+        return address_id;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long address_id) {
+        this.address_id = address_id;
     }
+
+    @Column(name = "name", nullable = false)
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    } 
 
     @Column(name = "unit_number", nullable = false)
     public int getNumber() {
@@ -110,13 +112,7 @@ public class Address {
     public void setLongitude(String longitude) {
         this.longitude = longitude;
     }
-    @Column(name = "name", nullable = false)
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    } 
+  
 
    
     

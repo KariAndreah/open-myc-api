@@ -25,7 +25,7 @@ public class MykeRepositoryTest {
         LocalTime start_time = LocalTime.parse("14:00:00");  
         String oldstring = "2023-08-03 00:00:00.0";
         LocalDate datetime = LocalDate.parse(oldstring, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S")); 
-        Myke myke1 = new Myke(1,"YKA LOUNGE",1,start_time,"Tue","Manhattan",0, datetime); 
+        Myke myke1 = new Myke(1, "YKA", 1, start_time, "Tuesday", "Manhattan", 1, 1, 0, datetime); 
 
 
         

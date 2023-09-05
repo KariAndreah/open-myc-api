@@ -1,6 +1,5 @@
 package com.myke.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 
@@ -10,13 +9,13 @@ import jakarta.persistence.*;
 public class Cost {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long cost_id;
     private String cost_amount; 
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    @JsonBackReference
-    private Myke myke;
+    // @OneToOne(cascade = CascadeType.ALL)
+    // @JoinColumn(name = "cost_id")
+    // @JsonBackReference
+    // private Myke myke;
 
 
     public Cost() {
@@ -24,22 +23,22 @@ public class Cost {
     }
 
     public Cost(
-    long id,
+    long cost_id,
     String cost_amount
      ) {
-        this.id=id;
+        this.cost_id=cost_id;
         this.cost_amount=cost_amount;
          
     }
 
    
 
-    @Column(name = "id", nullable = false)
+    @Column(name = "cost_id", nullable = false)
     public long getId() {
-        return id;
+        return cost_id;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long cost_id) {
+        this.cost_id = cost_id;
     }
     @Column(name = "cost_amount", nullable = false)
     public String getCostAmount() {

@@ -4,7 +4,6 @@ package com.myke.demo.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.*;
 
@@ -20,9 +19,9 @@ public class Myke {
     private String borough; 
     private LocalTime start_time; 
     private String day;
-    // private int host;
-    // private int cost; 
-    // private int signup; 
+    // private int host_id;
+    // private int cost_id; 
+    // private int signup_id; 
     private LocalDate confirmed; 
 
    
@@ -38,18 +37,18 @@ public class Myke {
     LocalTime start_time, 
     String day,
     String borough,
-    // int host,
-    // int cost,
-    int signup,
+    int host_id,
+    int cost_id,
+    int signup_id,
     LocalDate date ) {
         this.id=id;
         this.name=name;
         // this.address_id=address_id;
         this.borough=borough; 
         this.start_time=start_time;
-        // this.host=host;
-        // this.cost=cost;
-        // this.signup=signup;
+        // this.host_id=host_id;
+        // this.cost_id=cost_id;
+        // this.signup_id=signup_id;
         this.confirmed=date;  
     }
 
@@ -73,10 +72,10 @@ public class Myke {
         this.name = name;
     }
     // @Column(name = "address_id", nullable = false)
-    // public int getAddress() {
+    // public int getAddressId() {
     //     return address_id;
     // }
-    // public void setAddress(int address_id) {
+    // public void setAddressId(int address_id) {
     //     this.address_id = address_id;
     // }
 
@@ -101,37 +100,31 @@ public class Myke {
     public void setBorough(String borough) {
         this.borough = borough;
     }
-    // @Column(name = "host", nullable = false)
+    // @Column(name = "host_id", nullable = false)
     // public int getHostId() {
-    //     return host;
+    //     return host_id;
     // }
-    // public void setHostId(int host) {
-    //     this.host = host;
+    // public void setHostId(int host_id) {
+    //     this.host_id = host_id;
     // }
-    // @Column(name = "cost", nullable = false)
+    // @Column(name = "cost_id", nullable = false)
     // public int getCostId() {
-    //     return cost;
+    //     return cost_id;
     // }
-    // public void setCostId(int cost) {
-    //     this.cost = cost;
+    // public void setCostId(int cost_id) {
+    //     this.cost_id = cost_id;
     // }
     // @Column(name = "signup_id", nullable = false)
-    // public int getSignupId() {
-    //     return signup;
+    // public int getSignupId() 
+    //     return signup_id;
     // }
-    // public void setSignupId(int signup) {
-    //     this.signup = signup;
+    // public void setSignupId(int signup_id) {
+    //     this.signup_id = signup_id;
     // }
-    @Column(name = "confirmed", nullable = false)
-    public LocalDate getConfirmedDate() {
-        return confirmed;
-    }
-    public void setConfirmedDate(LocalDate confirmed) {
-        this.confirmed = confirmed;
-    }
+  
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="address_id", referencedColumnName = "address_id")
     private Address address; 
 
     public Address getAddress(){
@@ -142,8 +135,8 @@ public class Myke {
         this.address = address; 
     }
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cost_id", referencedColumnName="cost_id" )
     private Cost cost; 
 
     public Cost getCost(){
@@ -155,10 +148,8 @@ public class Myke {
     }
 
   
-
-
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "signup_id", referencedColumnName="signup_id" )
     private Signup signup; 
 
     public Signup getSignup(){
@@ -169,8 +160,8 @@ public class Myke {
         this.signup = signup; 
     }
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "myke")
-    @JsonManagedReference
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "host_id", referencedColumnName="host_id" )
     private Host host; 
 
     public Host getHost(){
@@ -179,6 +170,14 @@ public class Myke {
 
     public void setHost(Host host) {
         this.host = host; 
+    }
+
+    @Column(name = "confirmed", nullable = false)
+    public LocalDate getConfirmedDate() {
+        return confirmed;
+    }
+    public void setConfirmedDate(LocalDate confirmed) {
+        this.confirmed = confirmed;
     }
 
    

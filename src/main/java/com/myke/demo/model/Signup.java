@@ -1,6 +1,5 @@
 package com.myke.demo.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import jakarta.persistence.*;
 
@@ -10,13 +9,11 @@ import jakarta.persistence.*;
 public class Signup {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private long signup_id;
     private String instructions; 
     
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id")
-    @JsonBackReference
-    private Myke myke;
+    // @OneToOne
+    // private Myke myke;
 
 
     public Signup() {
@@ -24,22 +21,22 @@ public class Signup {
     }
 
     public Signup(
-    long id,
+    long signup_id,
     String instructions
      ) {
-        this.id=id;
+        this.signup_id=signup_id;
         this.instructions=instructions;
          
     }
 
    
 
-    @Column(name = "id", nullable = false)
+    @Column(name = "signup_id", nullable = false)
     public long getId() {
-        return id;
+        return signup_id;
     }
-    public void setId(long id) {
-        this.id = id;
+    public void setId(long signup_id) {
+        this.signup_id = signup_id;
     }
     @Column(name = "instructions", nullable = false)
     public String getInstructions() {
