@@ -26,11 +26,17 @@ public class MykeController {
     @Autowired
     private MykeService mykeService;
 
-    // Get all mics 
-    // @GetMapping
-    // public List<Myke> findAll() {
-    //     return mykeService.findAll();
-    // }
+    // Get all mics with pagination
+	@GetMapping
+    public ResponseEntity<List<Myke>> getAllMics(
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.getAllMics(pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
 
     // Get mic by ID
     @GetMapping("/{id}")
@@ -38,17 +44,79 @@ public class MykeController {
         return mykeService.findById(id);
     }
 
-    //   Get mic by Day
-    @GetMapping("/day={day}")
-    public List<Myke> findByDay(@PathVariable String day) {
-        return mykeService.findByDay(day);
+    // Get Mic by Day
+    @GetMapping(value ="findByDay")
+    public ResponseEntity<List<Myke>> findByDay(
+                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.findByDay(day, pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
-    // Get mic by ID
-    @GetMapping("/id={id}&day={day}")
-    public List<Myke> findByDayAndId(@PathVariable String day, Long id) {
-        return mykeService.findByDayAndId(day, id);
+    // Get mic by day and cost and paging
+    @GetMapping(value ="findByDayAndFree")
+    public ResponseEntity<List<Myke>> findByDayAndFree(
+                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
+                        @RequestParam(value = "cost", required=false, defaultValue="1") Cost cost,
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.findByDayAndFree(day, cost, pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
+
+    // Get mic by day and and time 
+    @GetMapping(value ="findByTime")
+    public ResponseEntity<List<Myke>> findByDayAndTime(
+                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
+                        @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
+                        @RequestParam(value = "startTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.findByDayAndTime(day, start_timeA, start_timeB, pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+    // Get mic by day and and time and free and paging
+    @GetMapping(value ="findByAllFree")
+    public ResponseEntity<List<Myke>> findByBoroughAndDayAndTimeAndFree(
+                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
+                        @RequestParam(value = "borough", required=false, defaultValue = "") String borough,
+                        @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
+                        @RequestParam(value = "endTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
+                        @RequestParam(value = "cost", required=false, defaultValue="1") Cost cost,
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.findByBoroughAndDayAndTimeAndFree(borough, day, start_timeA, start_timeB, cost, pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+
+    //   Get mic by Day
+    // @GetMapping("/day={day}")
+    // public List<Myke> findByDay(@PathVariable String day) {
+    //     return mykeService.findByDay(day);
+    // }
+
+
+
+    // Get mic by ID
+    // @GetMapping("/id={id}&day={day}")
+    // public List<Myke> findByDayAndId(@PathVariable String day, Long id) {
+    //     return mykeService.findByDayAndId(day, id);
+    // }
 
     // Get mic by day and cost 
     // @GetMapping(value = "test")
@@ -67,34 +135,11 @@ public class MykeController {
     //     return mykeService.findByDayAndCostOptional(day, cost );
     // }
    
-    // Get mic by day and cost and paging
-    @GetMapping(value ="findBy")
-    public ResponseEntity<List<Myke>> findByDayAndCostOptional(
-                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
-                        @RequestParam(value = "cost", required=false) Cost cost,
-                        @RequestParam(defaultValue = "0") Integer pageNo,
-                        @RequestParam(defaultValue = "10") Integer pageSize,
-                        @RequestParam(defaultValue = "id") String sortBy)
-    {
-        List<Myke> list = mykeService.findByDayAndCostOptional(day, cost, pageNo, pageSize, sortBy);
+  
+ 
 
-        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
-    }
 
-       // Get mic by day and cost and paging
-    @GetMapping(value ="findByTime")
-    public ResponseEntity<List<Myke>> findByDayAndTime(
-                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
-                        @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
-                        @RequestParam(value = "startTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
-                        @RequestParam(defaultValue = "0") Integer pageNo,
-                        @RequestParam(defaultValue = "10") Integer pageSize,
-                        @RequestParam(defaultValue = "id") String sortBy)
-    {
-        List<Myke> list = mykeService.findByDayAndTime(day, start_timeA, start_timeB, pageNo, pageSize, sortBy);
-
-        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
-    }
+   
 
     // Get all parameters
     @GetMapping(value = "test")
@@ -104,18 +149,7 @@ public class MykeController {
     }
 
 
-	// Get all mics with pagination
-	@GetMapping
-    public ResponseEntity<List<Myke>> getAllMics(
-                        @RequestParam(defaultValue = "0") Integer pageNo,
-                        @RequestParam(defaultValue = "10") Integer pageSize,
-                        @RequestParam(defaultValue = "id") String sortBy)
-    {
-        List<Myke> list = mykeService.getAllMics(pageNo, pageSize, sortBy);
-
-        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
-    }
-
+	
 	 // Get mic by ID
     // @GetMapping("/{id}")
     // public Optional<Myke> getMicById(@PathVariable Long id) {
@@ -141,6 +175,13 @@ public class MykeController {
     // public List<Myke> findByDay(@PathVariable String day) {
     //     return mykeService.findByDay(day);
     // }
+
+     // Get all mics 
+    // @GetMapping
+    // public List<Myke> findAll() {
+    //     return mykeService.findAll();
+    // }
+
    
 }
 
