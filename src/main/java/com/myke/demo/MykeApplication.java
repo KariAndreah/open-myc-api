@@ -21,13 +21,10 @@ public class MykeApplication {
 		SpringApplication.run(MykeApplication.class, args);
 	}
 
-
-
 	@GetMapping()
 	public String hello(){
 		return "Hello World";
 	}
-
 
 
 }

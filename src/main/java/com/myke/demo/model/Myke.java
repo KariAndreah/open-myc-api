@@ -23,6 +23,7 @@ public class Myke {
     // private int cost_id; 
     // private int signup_id; 
     private LocalDate confirmed; 
+    private String notes; 
 
    
 
@@ -40,7 +41,9 @@ public class Myke {
     int host_id,
     int cost_id,
     int signup_id,
-    LocalDate date ) {
+    LocalDate date, 
+    String notes
+ ) {
         this.id=id;
         this.name=name;
         // this.address_id=address_id;
@@ -49,6 +52,7 @@ public class Myke {
         // this.host_id=host_id;
         // this.cost_id=cost_id;
         // this.signup_id=signup_id;
+        this.notes = notes; 
         this.confirmed=date;  
     }
 
@@ -180,6 +184,12 @@ public class Myke {
         this.confirmed = confirmed;
     }
 
-   
+    @Column(name = "notes", nullable = false)
+    public String getNotes() {
+        return notes;
+    }
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
 
 }
