@@ -1,50 +1,55 @@
 # OPEN MYC API 
 
-**Welcome to OpenMYC: Locate the Laughs**
+**Welcome to Open MYC API: Locate the Laughs**
 
-All the comedy open mic data in NYC in one place, 
-easily accessible through a modern RESTful API.
+All the comedy open mic info in the New York City five boroughs in one place, easily accessible through a modern RESTful API.
 
 **This API is hosted on [Heroku](https://open-myc-api-b3fdf5fc5994.herokuapp.com/).**
+
+All data is stored in a Heroku Postgres Database. The API was built using Spring Boot. 
 
 
 
 ## Get Requests
 
-`GET /mics`\
-Get All Mics 
+### Get all mics 
+`GET /mics`
 
-`Get /mics/{id}`\
-Get Mic by ID
 
-`GET /mics/findByDay?day={day}`\
-Get Mics by day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)
+### Get mics by id
+`Get /mics/{id}`
 
-`GET /mics/findByDayFree?day={day}`\
-Get Mics by:\
-day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
-And Free 
+### Get mics by day 
+`GET /mics/findByDay?day={day}`
+day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 
-`GET /mics/findByDayTime?day={day}&startTime={startTime}&endTime={endTime}`\
-Get Mics by:\
-day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
-time('HH:MM:SS')
+### Get free mics by day 
+`GET /mics/findByDayFree?day={day}`
+day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 
-`GET /mics/findByAll?day={day}&borough={borough}&startTime={startTime}&endTime={endTime}`\
-Get Mics by All Parameters:\
-day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
-borough (Manhattan, Queens, Bronx, Brooklyn, Staten-Island)\
-time('HH:MM:SS')
+### Get mics by day and time 
+`GET /mics/findByDayTime?day={day}&startTime={startTime}&endTime={endTime}`
+day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\
+startTime: HH:MM:SS
+endTime: HH:MM:SS
 
-`GET /mics/findByAllFree?day={day}&borough={borough}&startTime={startTime}&endTime={endTime}`\
-Get Mics by All Parameters and Free:\ 
-day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
-borough (Manhattan, Queens, Bronx, Brooklyn, Staten-Island)\
-time('HH:MM:SS')
+### Get mics by day, borough, and time 
+`GET /mics/findByAll?day={day}&borough={borough}&startTime={startTime}&endTime={endTime}`
+day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\
+borough: Manhattan, Queens, Bronx, Brooklyn, Staten-Island\
+startTime: HH:MM:SS\
+endTime: HH:MM:SS
 
-*@Parameters are optional*
+### Get free mics by day, borough, and time 
+`GET /mics/findByAllFree?day={day}&borough={borough}&startTime={startTime}&endTime={endTime}`
+day: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday\
+borough: Manhattan, Queens, Bronx, Brooklyn, Staten-Island\
+startTime: HH:MM:SS\
+endTime: HH:MM:SS 
 
-*All requests have Pagination and Sorting, append parameters:*\
+***@Parameters are optional***
+
+***All requests have Pagination and Sorting, append parameters:***\
 pageNo={}\
 pageSize={}\
 sortBy={}
