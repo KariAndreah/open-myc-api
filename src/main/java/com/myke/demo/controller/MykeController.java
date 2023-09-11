@@ -57,21 +57,21 @@ public class MykeController {
 
     // Get mic by day and cost and paging
     @GetMapping(value ="findByDayFree")
-    public ResponseEntity<List<Myke>> findByDayAndFree(
+    public ResponseEntity<List<Myke>> findByDayFree(
                         @RequestParam(value = "day", required=false, defaultValue = "") String day,
                         @RequestParam(value = "cost", required=false, defaultValue="1") Cost cost,
                         @RequestParam(defaultValue = "0") Integer pageNo,
                         @RequestParam(defaultValue = "10") Integer pageSize,
                         @RequestParam(defaultValue = "id") String sortBy)
     {
-        List<Myke> list = mykeService.findByDayAndFree(day, cost, pageNo, pageSize, sortBy);
+        List<Myke> list = mykeService.findByDayFree(day, cost, pageNo, pageSize, sortBy);
 
         return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
     // Get mic by day and and time 
     @GetMapping(value ="findByDayTime")
-    public ResponseEntity<List<Myke>> findByDayAndTime(
+    public ResponseEntity<List<Myke>> findByDayTime(
                         @RequestParam(value = "day", required=false, defaultValue = "") String day,
                         @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
                         @RequestParam(value = "endTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
@@ -79,14 +79,30 @@ public class MykeController {
                         @RequestParam(defaultValue = "10") Integer pageSize,
                         @RequestParam(defaultValue = "id") String sortBy)
     {
-        List<Myke> list = mykeService.findByDayAndTime(day, start_timeA, start_timeB, pageNo, pageSize, sortBy);
+        List<Myke> list = mykeService.findByDayTime(day, start_timeA, start_timeB, pageNo, pageSize, sortBy);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+    }
+
+     // Get mic by day and and time and free and paging
+    @GetMapping(value ="findByAll")
+    public ResponseEntity<List<Myke>> findByBoroughDayTime(
+                        @RequestParam(value = "day", required=false, defaultValue = "") String day,
+                        @RequestParam(value = "borough", required=false, defaultValue = "") String borough,
+                        @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
+                        @RequestParam(value = "endTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
+                        @RequestParam(defaultValue = "0") Integer pageNo,
+                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "id") String sortBy)
+    {
+        List<Myke> list = mykeService.findByBoroughDayTime(borough, day, start_timeA, start_timeB, pageNo, pageSize, sortBy);
 
         return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
     // Get mic by day and and time and free and paging
     @GetMapping(value ="findByAllFree")
-    public ResponseEntity<List<Myke>> findByBoroughAndDayAndTimeAndFree(
+    public ResponseEntity<List<Myke>> findByBoroughDayTimeFree(
                         @RequestParam(value = "day", required=false, defaultValue = "") String day,
                         @RequestParam(value = "borough", required=false, defaultValue = "") String borough,
                         @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
@@ -96,7 +112,7 @@ public class MykeController {
                         @RequestParam(defaultValue = "10") Integer pageSize,
                         @RequestParam(defaultValue = "id") String sortBy)
     {
-        List<Myke> list = mykeService.findByBoroughAndDayAndTimeAndFree(borough, day, start_timeA, start_timeB, cost, pageNo, pageSize, sortBy);
+        List<Myke> list = mykeService.findByBoroughDayTimeFree(borough, day, start_timeA, start_timeB, cost, pageNo, pageSize, sortBy);
 
         return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }

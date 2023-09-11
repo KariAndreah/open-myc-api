@@ -37,15 +37,15 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
 
     // Find By Day and Free
     @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.cost is NULL OR m.cost = :cost)")
-    Page<Myke> findByDayAndFree(@Param("day") String day, @Param("cost") Cost id, Pageable pageable );
+    Page<Myke> findByDayFree(@Param("day") String day, @Param("cost") Cost id, Pageable pageable );
 
     // Find By Day and Time 
     @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.start_time BETWEEN :timeA and :timeB)")
-    Page<Myke> findByDayAndTime(@Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, Pageable pageable );
+    Page<Myke> findByDayTime(@Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, Pageable pageable );
 
      // Find By Day and Time and Free
     @Query(value = "SELECT m FROM Myke m WHERE (m.day is NULL OR m.day LIKE %:day%) AND (m.start_time BETWEEN :timeA and :timeB) AND (m.cost is NULL OR m.cost = :cost) ")
-    Page<Myke> findByDayAndTimeAndFree(@Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, @Param("cost") Cost id, Pageable pageable );
+    Page<Myke> findByDayTimeFree(@Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, @Param("cost") Cost id, Pageable pageable );
 
     // Find By Borough with Pagination
     @Query("SELECT m FROM Myke m WHERE m.borough LIKE %:borough%")
@@ -53,24 +53,24 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
 
      // Find By Borough and Free
     @Query(value = "SELECT m FROM Myke m WHERE (m.borough is NULL OR m.borough LIKE %:borough%) AND (m.cost is NULL OR m.cost = :cost)")
-    Page<Myke> findByBoroughAndFree(@Param("borough") String borough, @Param("cost") Cost id, Pageable pageable );
+    Page<Myke> findByBoroughFree(@Param("borough") String borough, @Param("cost") Cost id, Pageable pageable );
 
      // Find By Borough and Day 
     @Query(value = "SELECT m FROM Myke m WHERE (m.borough is NULL OR m.borough LIKE %:borough%) AND (m.day is NULL OR m.day LIKE %:day%)")
-    Page<Myke> findByBoroughAndDay(@Param("borough") String borough, @Param("day") String day, Pageable pageable );
+    Page<Myke> findByBoroughDay(@Param("borough") String borough, @Param("day") String day, Pageable pageable );
 
     // Find By Borough and Day and Free 
     @Query(value = "SELECT m FROM Myke m WHERE (m.borough is NULL OR m.borough LIKE %:borough%) AND (m.day is NULL OR m.day LIKE %:day%) AND (m.cost is NULL OR m.cost = :cost)")
-    Page<Myke> findByBoroughAndDayAndFree(@Param("borough") String borough, @Param("day") String day, @Param("cost") Cost id, Pageable pageable );
+    Page<Myke> findByBoroughDayFree(@Param("borough") String borough, @Param("day") String day, @Param("cost") Cost id, Pageable pageable );
 
      // Find By Borough and Day and Time 
     @Query(value = "SELECT m FROM Myke m WHERE (m.borough is NULL OR m.borough LIKE %:borough%) AND (m.day is NULL OR m.day LIKE %:day%) AND (m.start_time BETWEEN :timeA and :timeB)")
-    Page<Myke> findByBoroughAndDayAndTime(@Param("borough") String borough, @Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, Pageable pageable );
+    Page<Myke> findByBoroughDayTime(@Param("borough") String borough, @Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, Pageable pageable );
 
 
     // Find By Borough and Day and Time and Free
     @Query(value = "SELECT m FROM Myke m WHERE (m.borough is NULL OR m.borough LIKE %:borough%) AND (m.day is NULL OR m.day LIKE %:day%) AND (m.start_time BETWEEN :timeA and :timeB) AND (m.cost is NULL OR m.cost = :cost) ")
-    Page<Myke> findByBoroughAndDayAndTimeAndFree(@Param("borough") String borough, @Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, @Param("cost") Cost id, Pageable pageable );
+    Page<Myke> findByBoroughDayTimeFree(@Param("borough") String borough, @Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, @Param("cost") Cost id, Pageable pageable );
 
   
 
