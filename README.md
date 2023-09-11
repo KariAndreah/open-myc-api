@@ -6,6 +6,7 @@ All the comedy open mic info in the New York City five boroughs in one place, ea
 
 **This API is hosted on [Heroku](https://open-myc-api-b3fdf5fc5994.herokuapp.com/).**
 
+
 All data is stored in a Heroku Postgres Database. The API was built using Spring Boot. 
 
 
@@ -63,6 +64,7 @@ pageNo={}\
 pageSize={}\
 sortBy={}
 
+**[Swagger API Documentation](https://open-myc-api-b3fdf5fc5994.herokuapp.com/swagger-ui/index.html#/)**
 
 
 
