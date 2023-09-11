@@ -2,7 +2,6 @@ package com.myke.demo.controller;
 
 import java.time.LocalTime;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import com.myke.demo.model.Cost;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -58,7 +56,7 @@ public class MykeController {
     }
 
     // Get mic by day and cost and paging
-    @GetMapping(value ="findByDayAndFree")
+    @GetMapping(value ="findByDayFree")
     public ResponseEntity<List<Myke>> findByDayAndFree(
                         @RequestParam(value = "day", required=false, defaultValue = "") String day,
                         @RequestParam(value = "cost", required=false, defaultValue="1") Cost cost,
@@ -72,11 +70,11 @@ public class MykeController {
     }
 
     // Get mic by day and and time 
-    @GetMapping(value ="findByTime")
+    @GetMapping(value ="findByDayTime")
     public ResponseEntity<List<Myke>> findByDayAndTime(
                         @RequestParam(value = "day", required=false, defaultValue = "") String day,
                         @RequestParam(value = "startTime", required=false, defaultValue = "00:00:00") LocalTime start_timeA,
-                        @RequestParam(value = "startTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
+                        @RequestParam(value = "endTime", required=false, defaultValue = "23:59:59") LocalTime start_timeB,
                         @RequestParam(defaultValue = "0") Integer pageNo,
                         @RequestParam(defaultValue = "10") Integer pageSize,
                         @RequestParam(defaultValue = "id") String sortBy)
@@ -142,11 +140,11 @@ public class MykeController {
    
 
     // Get all parameters
-    @GetMapping(value = "test")
-    @ResponseBody
-    public String updateFoos(@RequestParam Map<String,String> allParams) {
-        return "Parameters are " + allParams.entrySet();    
-    }
+    // @GetMapping(value = "test")
+    // @ResponseBody
+    // public String updateFoos(@RequestParam Map<String,String> allParams) {
+    //     return "Parameters are " + allParams.entrySet();    
+    // }
 
 
 	

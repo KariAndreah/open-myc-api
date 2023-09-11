@@ -23,7 +23,7 @@ public class MykeApplication {
 
 	@GetMapping()
 	public String hello(){
-		return "Hello World";
+		return "Welcome to the Open MYC API";
 	}
 
 
