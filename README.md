@@ -18,31 +18,31 @@ Get All Mics
 Get Mic by ID
 
 `GET /mics/findByDay?day={day}`\
-Get Mic by day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)
+Get Mics by day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)
 
 `GET /mics/findByDayFree?day={day}`\
-Get Mic by:\
+Get Mics by:\
 day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
 And Free 
 
 `GET /mics/findByDayTime?day={day}&startTime={startTime}&endTime={endTime}`\
-Get Mic by:\
+Get Mics by:\
 day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
 time('HH:MM:SS')
 
 `GET /mics/findByAll?day={day}&borough={borough}&startTime={startTime}&endTime={endTime}`\
-Get Mic by All Parameters\ 
+Get Mics by All Parameters:\
 day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
 borough (Manhattan, Queens, Bronx, Brooklyn, Staten-Island)\
 time('HH:MM:SS')
 
 `GET /mics/findByAllFree?day={day}&borough={borough}&startTime={startTime}&endTime={endTime}`\
-Get Mic by All Parameters and Free\ 
+Get Mics by All Parameters and Free:\ 
 day (Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday)\
 borough (Manhattan, Queens, Bronx, Brooklyn, Staten-Island)\
 time('HH:MM:SS')
 
-*@Parameters are optional*\
+*@Parameters are optional*
 
 *All requests have Pagination and Sorting, append parameters:*\
 pageNo={}\
