@@ -1,11 +1,11 @@
 # OPEN MYC API 
 
-** Welcome to OpenMYC: Locate the Laughs **
+**Welcome to OpenMYC: Locate the Laughs**
 
 All the comedy open mic data in NYC in one place, 
 easily accessible through a modern RESTful API.
 
-** This API is hosted on [Heroku](https://open-myc-api-b3fdf5fc5994.herokuapp.com/).**
+**This API is hosted on [Heroku](https://open-myc-api-b3fdf5fc5994.herokuapp.com/).**
 
 
 
@@ -38,10 +38,10 @@ time('HH:MM:SS')
 
 
 
-All requests have Pagination and Sorting, append parameters:\
+* *All requests have Pagination and Sorting, append parameters:* *\
 pageNo={}\
 pageSize={}\
-sortBy={}\
+sortBy={}
 
 
 
