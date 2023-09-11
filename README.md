@@ -35,7 +35,7 @@ All data is stored in a Heroku Postgres Database. The API was built using Spring
 
 
 **day**: Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
-**startTime**: HH:MM:SS
+**startTime**: HH:MM:SS\
 **endTime**: HH:MM:SS
 
 ### Get mics by day, borough, and time 
