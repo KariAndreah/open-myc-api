@@ -30,7 +30,7 @@ public class MykeController {
 	@GetMapping
     public ResponseEntity<List<Myke>> getAllMics(
                         @RequestParam(defaultValue = "0") Integer pageNo,
-                        @RequestParam(defaultValue = "10") Integer pageSize,
+                        @RequestParam(defaultValue = "12") Integer pageSize,
                         @RequestParam(defaultValue = "id") String sortBy)
     {
         List<Myke> list = mykeService.getAllMics(pageNo, pageSize, sortBy);
@@ -118,6 +118,35 @@ public class MykeController {
 
         return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
+
+     // Get Mic by Borough
+     @GetMapping(value ="findByBorough")
+    //  public void ResponseEntity()
+    public ResponseEntity<List<Myke>> findByBorough(
+                        @RequestParam(value = "borough", required=false, defaultValue = "") String borough)
+    {
+        List<Myke> list = mykeService.findByBorough(borough);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+
+        // String message = "hi kari "; 
+        // System.out.println(borough); 
+    }
+
+       // Get Mic by Borough
+     @GetMapping(value ="findByBoroughs")
+    //  public void ResponseEntity()
+    public ResponseEntity<List<Myke>> findByBoroughs(
+                        @RequestParam(value = "borough", required=false, defaultValue = "") List<String> borough)
+    {
+        List<Myke> list = mykeService.findByBoroughs(borough);
+
+        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+
+        // String message = "hi kari "; 
+        // System.out.println(borough); 
+    }
+
 
 
     //   Get mic by Day

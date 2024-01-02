@@ -4,6 +4,7 @@ import com.myke.demo.model.Cost;
 import com.myke.demo.model.Myke;
 
 import java.time.LocalTime;
+import java.util.List;
 // import java.sql.Time;
 // import java.util.Date;
 // import java.util.List;
@@ -71,6 +72,14 @@ public interface MykeRepository extends JpaRepository<Myke, Long>{
     // Find By Borough and Day and Time and Free
     @Query(value = "SELECT m FROM Myke m WHERE (m.borough is NULL OR m.borough LIKE %:borough%) AND (m.day is NULL OR m.day LIKE %:day%) AND (m.start_time BETWEEN :timeA and :timeB) AND (m.cost is NULL OR m.cost = :cost) ")
     Page<Myke> findByBoroughDayTimeFree(@Param("borough") String borough, @Param("day") String day, @Param("timeA") LocalTime start_timeA, @Param("timeB") LocalTime start_timeB, @Param("cost") Cost id, Pageable pageable );
+
+    // Find By Borough 
+    @Query("SELECT m FROM Myke m WHERE m.borough LIKE %:borough%")
+    List<Myke> findByBorough(@Param("borough") String borough);
+
+    // Find By Boroughs 
+    @Query("SELECT m FROM Myke m WHERE m.borough IN :borough")
+    List<Myke> findByBoroughs(@Param("borough") List<String> borough);
 
   
 

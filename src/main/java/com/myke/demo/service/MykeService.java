@@ -13,6 +13,7 @@ import com.myke.demo.repository.MykeRepository;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 // import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -104,6 +105,24 @@ public class MykeService {
             return new ArrayList<Myke>(); 
         }
     }
+
+     // Get all Mics with Borough
+     public List<Myke> findByBorough(String borough ) {
+        String message =  "---------- hi kari -------------- "; 
+        System.out.println(message + borough); 
+       
+              return mykeRepository.findByBorough(borough); 
+    }
+      // Get all Mics with Boroughs
+     public List<Myke> findByBoroughs(List<String> borough ) {
+        String message = "---------- hi kari -------------- this is passing:  "; 
+        System.out.println(message + (borough)); 
+       
+              return mykeRepository.findByBoroughs(borough); 
+            //   return null; 
+    }
+
+
 
 
     //  Get All Mics by Day
