@@ -29,13 +29,13 @@ public class MykeController {
 
     // Get all mics with pagination
     @GetMapping
-    public ResponseEntity<List<Myke>> getAllMics(
+    public ResponseEntity<Page<Myke>> getAllMics(
             @RequestParam(defaultValue = "0") Integer pageNo,
             @RequestParam(defaultValue = "10") Integer pageSize,
             @RequestParam(defaultValue = "id") String sortBy) {
-        List<Myke> list = mykeService.getAllMics(pageNo, pageSize, sortBy);
+        Page<Myke> list = mykeService.getAllMics(pageNo, pageSize, sortBy);
 
-        return new ResponseEntity<List<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
+        return new ResponseEntity<Page<Myke>>(list, new HttpHeaders(), HttpStatus.OK);
     }
 
     // Get mic by ID

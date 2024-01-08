@@ -22,16 +22,17 @@ public class MykeService {
     private MykeRepository mykeRepository;
 
     // Get all mics
-    public List<Myke> getAllMics(Integer pageNo, Integer pageSize, String sortBy) {
+    public Page<Myke> getAllMics(Integer pageNo, Integer pageSize, String sortBy) {
 
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         Page<Myke> pagedResult = mykeRepository.findAll(paging);
 
         if (pagedResult.hasContent()) {
-            return pagedResult.getContent();
+            return pagedResult;
         } else {
-            return new ArrayList<Myke>();
+            throw new MykeNotFoundException();
         }
+
     }
 
     // Get All Mics by Id
@@ -164,7 +165,11 @@ public class MykeService {
 
         Page<Myke> boroughList = mykeRepository.findByBoroughsDay(borough, day, paging);
 
-        return boroughList;
+        if (boroughList.hasContent()) {
+            return boroughList;
+        } else {
+            throw new MykeNotFoundException();
+        }
 
         // List<Myke> boroughList = mykeRepository.findByBoroughsDay(borough , day);
         // boroughList.addAll((mykeRepository.findByBoroughs(borough)).size());
@@ -183,7 +188,11 @@ public class MykeService {
 
         Page<Myke> boroughList = mykeRepository.findByBoroughsDayFree(borough, day, cost, paging);
 
-        return boroughList;
+        if (boroughList.hasContent()) {
+            return boroughList;
+        } else {
+            throw new MykeNotFoundException();
+        }
 
     }
 
