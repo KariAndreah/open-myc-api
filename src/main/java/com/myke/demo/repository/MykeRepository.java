@@ -28,8 +28,8 @@ public interface MykeRepository extends JpaRepository<Myke, Long> {
         Page<Myke> getAllMics(Pageable pageable);
 
         // Find By ID
-        @Query("SELECT m FROM Myke m WHERE m.id=?1")
-        Optional<Myke> findById(Long id);
+        @Query("SELECT m FROM Myke m WHERE m.id = :id")
+        Page<Myke> findById(long id, Pageable pageable);
 
         // Find By Day with Pagination
         @Query("SELECT m FROM Myke m WHERE m.day LIKE %:day%")

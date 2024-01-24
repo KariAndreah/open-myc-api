@@ -36,8 +36,18 @@ public class MykeService {
     }
 
     // Get All Mics by Id
-    public Optional<Myke> findById(long id) {
-        return mykeRepository.findById(id);
+    public Page<Myke> findById(long id, Integer pageNo, Integer pageSize,
+            String sortBy) {
+
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<Myke> micList = mykeRepository.findById(id, paging);
+
+        if (micList.hasContent()) {
+            return micList;
+        } else {
+            throw new MykeNotFoundException();
+        }
     }
 
     // Get all Mics with Day and Pageable

@@ -40,8 +40,22 @@ public class MykeController {
 
     // Get mic by ID
     @GetMapping("/{id}")
-    public Optional<Myke> findById(@PathVariable(required = false) Long id) {
-        return mykeService.findById(id);
+    public ResponseEntity<Page> findById(
+            @PathVariable("id") long id,
+            @RequestParam(defaultValue = "0") Integer pageNo,
+            @RequestParam(defaultValue = "10") Integer pageSize,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        Page<Myke> list = mykeService.findById(id, pageNo, pageSize, sortBy);
+
+        // Map<String, Object> response = new HashMap<>();
+
+        // response.put("mics", list);
+        // response.put("totalMics", list.getTotalElements());
+
+        return new ResponseEntity<Page>(list, new HttpHeaders(), HttpStatus.OK);
+
+        // String message = "hi kari ";
+        // System.out.println(borough);
     }
 
     // Get Mic by Day
